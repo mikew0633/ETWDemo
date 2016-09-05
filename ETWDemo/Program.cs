@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.Tracing;
 
 namespace ETWDemo
 {
@@ -10,6 +6,17 @@ namespace ETWDemo
     {
         static void Main(string[] args)
         {
+            EventSourceImplementation.Tracer.AppStarted();
+        }
+    }
+
+    public sealed class EventSourceImplementation : EventSource
+    {
+        static public EventSourceImplementation Tracer = new EventSourceImplementation();
+
+        public void AppStarted()
+        {
+            WriteEvent(1);
         }
     }
 }
